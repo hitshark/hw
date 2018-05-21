@@ -45,19 +45,24 @@
 # ----------------------------------------------------------------------------
 # TOOL LOCATIONS
 
-  export VCS_HOME   := /home/tools/vcs/mx-2015.09-SP2-9-T0426
+#  export VCS_HOME   := /home/tools/vcs/mx-2015.09-SP2-9-T0426
+  export VCS_HOME   := /home/tools/synopsys/vcs_M-2017.03-SP2
 
   VCS_EXECUTABLE    := ./simv
 
-  export VERDI_HOME := /home/tools/debussy/verdi3_2015.09-SP2-11
+#  export VERDI_HOME := /home/tools/debussy/verdi3_2015.09-SP2-11
+  export VERDI_HOME := /home/tools/synopsys/verdi_L-2016.06-1
 
-  export NOVAS_HOME := /home/tools/debussy/verdi3_2015.09-SP2-11
+#  export NOVAS_HOME := /home/tools/debussy/verdi3_2015.09-SP2-11
+  export NOVAS_HOME := /home/tools/synopsys/verdi_L-2016.06-1
 
   export LM_LICENSE_FILE := /home/tools/admin/license_files
 
-  export VCS_CC     := /home/utils/gcc-4.7.2/bin/g++
+#  export VCS_CC     := /home/utils/gcc-4.7.2/bin/g++
+  export VCS_CC     := /usr/bin/g++
 
-  export SPYGLASS_HOME := /home/tools/spyglass/SpyGlass-5.2.1.2/SPYGLASS_HOME
+#  export SPYGLASS_HOME := /home/tools/spyglass/SpyGlass-5.2.1.2/SPYGLASS_HOME
+  export SPYGLASS_HOME := /home/tools/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME
 
   IMAGEVIEWER       := gimp
 
@@ -102,8 +107,8 @@ LSF_COMMAND       ?=
 #  SAIF=1	 : compile and run to generate saif files
 #
 
-DUMP	   ?= 0
-DUMPER	   ?= DVE
+DUMP	   ?= 1
+DUMPER	   ?= VERDI
 
 VPD_DUMP_NAME    ?= vcdplus.vpd
 VERDI_DUMP_NAME  ?= debussy.fsdb
@@ -632,7 +637,7 @@ esa  : ${VERICOM_LOG}
 
 # Run the Verdi waveform viewer
 verdi :
-	${LSF_COMMAND} $(VERDI_HOME)/bin/verdi -ssy -ssv -nologo -lib ${VERICOM_LIB} ${VERDI_BDB_OPTIONS} -top 'top' -DE '-full_time'  ${VERICOM_DUT_DEFINES} -tkName siloti_tkName_nvdla -ssf ${SIMTESTDIR}/$(subst fsdb,vf,${VERDI_DUMP_NAME}) &
+	${LSF_COMMAND} $(VERDI_HOME)/bin/verdi -play ~/.verdi_display_style -ssy -ssv -nologo -lib ${VERICOM_LIB} ${VERDI_BDB_OPTIONS} -top 'top' -DE '-full_time'  ${VERICOM_DUT_DEFINES} -tkName siloti_tkName_nvdla -ssf ${SIMTESTDIR}/$(subst fsdb,vf,${VERDI_DUMP_NAME}) &
 
 # Run the Verdi waveform viewer with smaller esa fsdb
 siloti :
